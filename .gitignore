@@ -1,0 +1,13 @@
+# Ansible
+*.retry
+
+# Python: Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.eggs/
+
+# Testing
+.tox/
+.vagrant/
+pytestdebug.log

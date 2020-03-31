@@ -1,0 +1,12 @@
+{{ ansible_managed | comment }}
+
+##############################################
+#                                            #
+#        dnscrypt-proxy configuration        #
+#                                            #
+##############################################
+
+# Online documentation is available here: https://dnscrypt.info/doc
+# An example configuration can be found here: https://raw.githubusercontent.com/DNSCrypt/dnscrypt-proxy/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
+
+{{ cfg | to_toml() }}

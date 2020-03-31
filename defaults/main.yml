@@ -1,0 +1,8 @@
+---
+# service
+dnscrypt_proxy_service_enabled: true
+dnscrypt_proxy_service_state: started
+
+# configuration parameters, for a complete list of parameters see:
+# https://raw.githubusercontent.com/DNSCrypt/dnscrypt-proxy/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
+dnscrypt_proxy_config: {}
