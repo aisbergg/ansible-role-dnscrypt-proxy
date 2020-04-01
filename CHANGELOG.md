@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-04-01
+### Changed
+- Change the defaults to work seamlessly with quad9
+
 ## [1.0.0] - 2020-03-31
 ### Added
 - First version of the role
