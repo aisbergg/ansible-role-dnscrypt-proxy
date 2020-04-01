@@ -33,6 +33,7 @@ None.
         - "9.9.9.9:53"
         - "8.8.8.8:53"
       ignore_system_dns: true
+      netprobe_address: "9.9.9.9:53"
 
   roles:
     - aisbergg.dnscrypt-proxy
