@@ -1,20 +1,18 @@
 ---
 - name: Configure DNSCrypt proxy
   template:
-    src: "dnscrypt-proxy.toml.j2"
-    dest: "{{ dnscrypt_proxy_config_file }}"
+    src: dnscrypt-proxy.toml.j2
+    dest: "{{ __dnscrypt_proxy_config_file }}"
     owner: root
     group: root
-    mode: "0644"
-    lstrip_blocks: true
+    mode: 0644
     validate: dnscrypt-proxy --config '%s' --check
   vars:
-    cfg: "{{ dnscrypt_proxy_config_defauls | combine(dnscrypt_proxy_config) }}"
-  notify:
-    - restart dnscrypt-proxy
+    cfg: "{{ __dnscrypt_proxy_config_defauls | combine(dnscrypt_proxy_config) }}"
+  notify: restart dnscrypt-proxy
 
 - when: dnscrypt_proxy_service_enabled or
-        dnscrypt_proxy_service_state in ["started", "restarted", "reloaded"]
+        dnscrypt_proxy_service_state != 'stopped'
   block:
     - name: Disable systemd-resolved service
       service:
@@ -32,10 +30,16 @@
       ini_file:
         path: /etc/NetworkManager/NetworkManager.conf
         section: main
-        option: dns
-        value: "{{ 'none' if dnscrypt_proxy_service_enabled else omit }}"
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
         mode: 0600
+      notify: restart networkmanager
       when: networkctl_available.stdout | length > 0
+      loop:
+        - option: dns
+          value: none
+        - option: systemd-resolved
+          value: "false"
 
     - name: Ensure DNSCrypt is set as system DNS resolver
       template:
@@ -48,6 +52,6 @@
 
 - name: Manage DNSCrypt proxy service
   service:
-    name: "{{ dnscrypt_proxy_service_name }}"
+    name: "{{ __dnscrypt_proxy_service_name }}"
     state: "{{ dnscrypt_proxy_service_state }}"
     enabled: "{{ dnscrypt_proxy_service_enabled }}"

@@ -1,3 +1,4 @@
 {{ ansible_managed | comment }}
+nameserver ::1
 nameserver 127.0.0.1
-options edns0
+options edns0 single-request-reopen

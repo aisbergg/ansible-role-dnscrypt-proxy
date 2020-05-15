@@ -1,7 +1,12 @@
 ---
 - name: restart dnscrypt-proxy
-  service:
-    name: "{{ dnscrypt_proxy_service_name }}"
+  systemd:
+    name: "{{ __dnscrypt_proxy_service_name }}"
     state: restarted
   when: dnscrypt_proxy_service_enabled or
-        dnscrypt_proxy_service_state in ["started", "restarted", "reloaded"]
+        dnscrypt_proxy_service_state != 'stopped'
+
+- name: restart networkmanager
+  systemd:
+    name: NetworkManager
+    state: restarted

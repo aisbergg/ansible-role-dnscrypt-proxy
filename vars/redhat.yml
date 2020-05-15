@@ -1,7 +1,0 @@
----
-# defaults for RedHat distributions
-
-# requirements for dnscrypt-proxy
-dnscrypt_proxy_requirements:
-  - dnscrypt-proxy
-  - python3-toml

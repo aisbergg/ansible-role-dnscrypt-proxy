@@ -1,5 +1,5 @@
 ---
 - name: Install DNSCrypt proxy
   package:
-    name: "{{ dnscrypt_proxy_requirements }}"
+    name: "{{ __dnscrypt_proxy_requirements }}"
     state: present

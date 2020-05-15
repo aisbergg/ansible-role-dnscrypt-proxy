@@ -1,17 +1,30 @@
 ---
-# defaults
-
 # requirements for dnscrypt-proxy
-dnscrypt_proxy_requirements:
-  - dnscrypt-proxy
-  - python-toml
+__dnscrypt_proxy_requirements_os:
+    debian:
+      - dnscrypt-proxy
+      - python3-toml
+    redhat:
+      - dnscrypt-proxy
+      - python3-toml
+    redhat7:
+      - dnscrypt-proxy2
+      - python3-toml
+    default:
+      - dnscrypt-proxy
+      - python-toml
+__dnscrypt_proxy_requirements: "{{
+    __dnscrypt_proxy_requirements_os[ansible_os_family | lower ~ ansible_distribution_major_version] |
+    default(__dnscrypt_proxy_requirements_os[ansible_os_family | lower]) |
+    default(__dnscrypt_proxy_requirements_os['default'])
+  }}"
 
 # service name
-dnscrypt_proxy_service_name: dnscrypt-proxy
+__dnscrypt_proxy_service_name: dnscrypt-proxy
 
 # configuration
-dnscrypt_proxy_config_file: /etc/dnscrypt-proxy/dnscrypt-proxy.toml
-dnscrypt_proxy_config_defauls:
+__dnscrypt_proxy_config_file: /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+__dnscrypt_proxy_config_defauls:
   server_names:
     - "quad9-dnscrypt-ip6-filter-pri"
     - "quad9-dnscrypt-ip6-filter-alt"
