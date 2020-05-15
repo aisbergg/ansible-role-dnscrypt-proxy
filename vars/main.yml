@@ -24,27 +24,17 @@ __dnscrypt_proxy_service_name: dnscrypt-proxy
 
 # configuration
 __dnscrypt_proxy_config_file: /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+# all available options: https://raw.githubusercontent.com/DNSCrypt/dnscrypt-proxy/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
 __dnscrypt_proxy_config_defauls:
-  server_names:
-    - "quad9-dnscrypt-ip6-filter-pri"
-    - "quad9-dnscrypt-ip6-filter-alt"
-    - "quad9-dnscrypt-ip4-filter-pri"
-    - "quad9-dnscrypt-ip4-filter-alt"
-  fallback_resolvers:
-    - "9.9.9.9:53"
-    - "8.8.8.8:53"
-  netprobe_address: "9.9.9.9:53"
-
+  # daemon config
+  listen_addresses:
+    - 127.0.0.1:53
+  max_clients: 250
+  log_level: 2
+  cert_refresh_delay: 240
   ignore_system_dns: true
-  ipv4_servers: true
-  ipv6_servers: true
-  dnscrypt_servers: true
-  doh_servers: false
 
-  tls_cipher_suite:
-    - 52392
-    - 49199
-
+  # server selection
   sources:
     quad9-resolvers:
       urls:
@@ -52,3 +42,38 @@ __dnscrypt_proxy_config_defauls:
       cache_file: quad9-resolvers.md
       minisign_key: RWQBphd2+f6eiAqBsvDZEBXBGHQBJfeG6G+wJPPKxCZMoEQYpmoysKUN
       prefix: 'quad9-'
+  ipv4_servers: true
+  ipv6_servers: true
+  dnscrypt_servers: true
+  doh_servers: true
+  require_dnssec: false
+  require_nolog: true
+  require_nofilter: true
+
+  fallback_resolvers:
+    - "9.9.9.9:53"
+    - "8.8.8.8:53"
+  netprobe_timeout: 60
+  netprobe_address: "9.9.9.9:53"
+
+  # connection settings
+  force_tcp: false
+  timeout: 5000
+  keepalive: 30
+  tls_cipher_suite:
+    - 52392
+    - 49199
+
+  # filters
+  block_ipv6: false
+  block_unqualified: true
+  block_undelegated: true
+  reject_ttl: 600
+
+  # cache
+  cache: true
+  cache_size: 4096
+  cache_min_ttl: 2400
+  cache_max_ttl: 86400
+  cache_neg_min_ttl: 60
+  cache_neg_max_ttl: 600
