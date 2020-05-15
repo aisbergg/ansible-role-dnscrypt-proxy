@@ -25,6 +25,7 @@
     - name: Check if NetworkManager is available
       shell: command -v networkctl
       changed_when: false
+      check_mode: false
       register: networkctl_available
 
     - name: Disable the NetworkManager internal DNS resolver
