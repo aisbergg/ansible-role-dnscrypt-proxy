@@ -1,0 +1,10 @@
+# skip the specified linter rules
+# see: https://ansible-lint.readthedocs.io/en/latest/default_rules.html
+skip_list:
+  - command-instead-of-shell
+
+# paths to be excluded from linting
+exclude_paths:
+  - .cache/
+  - .chglog/
+  - .github/
