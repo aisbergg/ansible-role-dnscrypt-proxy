@@ -10,8 +10,9 @@ None.
 
 | Variable | Default | Comments |
 |----------|---------|----------|
-| `dnscrypt_proxy_service_state` | `started` | Set the service state (Possible values: started, restarted, stopped) | 
-| `dnscrypt_proxy_service_enabled` | `true` | Enable/Disable the DNSCrypt Proxy service | 
+| `dnscrypt_proxy_service_state` | `started` | Set the service state (Possible values: started, restarted, stopped) |
+| `dnscrypt_proxy_service_enabled` | `true` | Enable/Disable the DNSCrypt Proxy service |
+| `dnscrypt_proxy_service_restart_on_change` | `true` | Restart DNSCrypt Proxy service on configuration changes. |
 | `dnscrypt_proxy_config` | `{}` | Dictionary (key-value pairs) of DNSCrypt Proxy configuration options. The role provides some sane defaults and is configured to work with quad9 (see: [`vars/main.yml`](./vars/main.yml)).</br></br>A list of all available options can be found in the [example configuration](https://raw.githubusercontent.com/DNSCrypt/dnscrypt-proxy/master/dnscrypt-proxy/example-dnscrypt-proxy.toml). Just make sure to use YAML syntax instead of the TOML. |
 
 ## Dependencies
