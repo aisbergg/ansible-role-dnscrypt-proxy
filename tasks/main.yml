@@ -1,15 +1,17 @@
 ---
-- name: Include OS-specific variables
-  tags: dnscrypt-proxy
-  include_vars: "{{ item }}"
+- name: include OS-specific variables
+  tags: [dnscrypt_proxy, always]
+  ansible.builtin.include_vars: "{{ item }}"
   with_first_found:
     - files:
-        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family | lower }}_{{ ansible_distribution_major_version }}.yml"
         - "{{ ansible_os_family | lower }}.yml"
       skip: true
 
-- import_tasks: install.yml
-  tags: dnscrypt-proxy
+- name: include installation tasks
+  tags: [dnscrypt_proxy, dnscrypt_proxy_install, install]
+  ansible.builtin.import_tasks: install.yml
 
-- import_tasks: configure.yml
-  tags: dnscrypt-proxy
+- name: include configuration tasks
+  tags: [dnscrypt_proxy, dnscrypt_proxy_config, config]
+  ansible.builtin.import_tasks: configure.yml

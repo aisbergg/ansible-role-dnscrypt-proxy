@@ -1,12 +1,13 @@
 ---
 - name: restart dnscrypt-proxy
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ __dnscrypt_proxy_service_name }}"
     state: restarted
-  when: dnscrypt_proxy_service_enabled or
-        dnscrypt_proxy_service_state != 'stopped'
+  when:
+    - dnscrypt_proxy_service_restart_on_change | bool
+    - dnscrypt_proxy_service_state != 'stopped'
 
 - name: restart networkmanager
-  systemd:
+  ansible.builtin.systemd:
     name: NetworkManager
     state: restarted

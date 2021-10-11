@@ -2,6 +2,7 @@
 # service
 dnscrypt_proxy_service_enabled: true
 dnscrypt_proxy_service_state: started
+dnscrypt_proxy_service_restart_on_change: true
 
 # configuration parameters, for a complete list of parameters see:
 # https://raw.githubusercontent.com/DNSCrypt/dnscrypt-proxy/master/dnscrypt-proxy/example-dnscrypt-proxy.toml
